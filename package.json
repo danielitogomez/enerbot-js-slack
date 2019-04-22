@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "axios": "^0.18.0",
     "chilenify": "^1.0.1",
     "micro": "^9.3.3",
     "node-fetch": "^2.3.0"

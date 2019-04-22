@@ -13,12 +13,10 @@ module.exports = async (req, res) => {
     result = error.message;
     attachments = [{ text: error.stack }];
     }
-
-    const message = "`" + body.text + "`: " + result;
     const response_type = "in_channel";
 
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ response_type, text: message, attachments }));
+    res.end(JSON.stringify({ response_type, text: result, attachments }));
 
 };
 
