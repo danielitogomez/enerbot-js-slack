@@ -8,12 +8,17 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "istanbul": "^0.4.5",
     "micro-dev": "^3.0.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.0.0",
+    "prettier": "1.17.0",
     "sinon": "^7.3.2"
   },
   "scripts": {
-    "test": "mocha tests/ -w --recursive",
-    "inspect": "node --inspect node_modules/.bin/micro-dev command.js"
+    "test": "nyc --reporter=html --reporter=text mocha tests/ --recursive",
+    "inspect": "node --inspect node_modules/.bin/micro-dev command.js",
+    "fix-code-format": "node_modules/.bin/prettier --write \"*.js\"",
+    "check-code-format": "node_modules/.bin/prettier --check \"*.js\""
   }
 }

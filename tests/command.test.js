@@ -62,5 +62,15 @@ describe('Lib', () => {
                done();
             })
        });
+       it('should array object has the randomElement function', (done) => {   
+        let Command = getCommand();
+        Command(null, res)
+        .then(() => {
+            const arr = ["1","2"]
+            expect(typeof arr.randomElement).to.be.equal("function");
+            expect(arr.randomElement()).to.not.be.null;
+            done();
+        })
+   });
     });
 });

@@ -3,7 +3,7 @@ const sinon = require("sinon");
 const proxyquire = require('proxyquire').noPreserveCache();
 const expect = chai.expect;
 describe('Lib', () => {
-    let modulesConf = [];
+    let modulesConf = () => [];
     let responseFunction;
     let getFunction;
     beforeEach(() => {
@@ -35,11 +35,13 @@ describe('Lib', () => {
             
         });
         it('should return nothing if regex dont exist', (done) => {
-            modulesConf.push({
+            modulesConf = () => {
+                return [{
                 "regex": new RegExp('packs$', 'i'), 
                 "dir" : "./System",
                 "functionName": "pack"
-            });
+                }];
+            }
             let Runner = getRunner();
             Runner.run('pack')
             .then((response) => {
@@ -49,11 +51,13 @@ describe('Lib', () => {
             
         });
         it('should return nothing if function dont exist', (done) => {
-            modulesConf.push({
+            modulesConf = () => {
+                return [{
                 "regex": new RegExp('pack$', 'i'), 
                 "dir" : "./System",
                 "functionName": "pack"
-            });
+                }]
+            };
             getFunction = () => null;
             let Runner = getRunner();
             Runner.run('pack')
@@ -64,10 +68,12 @@ describe('Lib', () => {
             
         });
         it('should return text if dir dont exist', (done) => {
-            modulesConf.push({
+            modulesConf = () => {
+                return [{
                 "regex": new RegExp('hola', 'i'), 
-                "text" : "HOLANDA",
-            });
+                "text" : "HOLANDA"
+                }]
+            };
             let Runner = getRunner();
             Runner.run('hola')
             .then((response) => {
@@ -77,11 +83,13 @@ describe('Lib', () => {
             
         });
         it('should return if module exist', (done) => {
-            modulesConf.push({
+            modulesConf = () => {
+                return [{
                 "regex": new RegExp('pack$', 'i'), 
                 "dir" : "./System",
                 "functionName": "pack"
-            });
+                }]
+            };
             responseFunction = "pack";
             let Runner = getRunner();
             Runner.run('pack')
