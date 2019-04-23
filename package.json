@@ -8,10 +8,12 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "micro-dev": "^3.0.0",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2"
   },
   "scripts": {
-    "test": "mocha tests/ -w --recursive"
+    "test": "mocha tests/ -w --recursive",
+    "inspect": "node --inspect node_modules/.bin/micro-dev command.js"
   }
 }
