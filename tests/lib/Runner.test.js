@@ -4,24 +4,10 @@ const proxyquire = require('proxyquire').noPreserveCache();
 const expect = chai.expect;
 describe('Lib', () => {
     let modulesConf = () => [];
-    let responseFunction;
-    let getFunction;
-    beforeEach(() => {
-        getFunction = () => {
-            return {
-                apply: () => {
-                    return responseFunction
-                }
-            }
-        };
-    });
-    
+
     const getRunner = () => {
         return  proxyquire('../../lib/Runner', {
-            './ModulesConf':  modulesConf,
-            './Loader' : {
-                getFunction: getFunction
-            }
+            './ModulesConf':  modulesConf
         });
     }
     describe('Runner', () => {
@@ -37,9 +23,7 @@ describe('Lib', () => {
         it('should return nothing if regex dont exist', (done) => {
             modulesConf = () => {
                 return [{
-                "regex": new RegExp('packs$', 'i'), 
-                "dir" : "./System",
-                "functionName": "pack"
+                "regex": new RegExp('packs$', 'i')
                 }];
             }
             let Runner = getRunner();
@@ -53,9 +37,8 @@ describe('Lib', () => {
         it('should return nothing if function dont exist', (done) => {
             modulesConf = () => {
                 return [{
-                "regex": new RegExp('pack$', 'i'), 
-                "dir" : "./System",
-                "functionName": "pack"
+                "regex": new RegExp('pack$', 'i'),
+                "wrapper": {}
                 }]
             };
             getFunction = () => null;
@@ -86,15 +69,14 @@ describe('Lib', () => {
             modulesConf = () => {
                 return [{
                 "regex": new RegExp('pack$', 'i'), 
-                "dir" : "./System",
-                "functionName": "pack"
+                "wrapper": () => "hola"
                 }]
             };
             responseFunction = "pack";
             let Runner = getRunner();
             Runner.run('pack')
             .then((response) => {
-                expect(response).to.be.equal("pack");
+                expect(response).to.be.equal("hola");
                 done()
             });
             
