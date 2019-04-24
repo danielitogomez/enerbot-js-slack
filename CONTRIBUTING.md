@@ -9,7 +9,8 @@ Cuando quieras realizar una nueva funcionalidad o mejora por favor antes discút
 3. Cada vez que se crea un PR. En la descripción te aparecerá una ur de [NOW](https://zeit.co/now) con la versión del artefacto que acabas de crear para poder realizar tus pruebas.
 4. Se exige 100% de cobertura de pruebas unitarias para aprobar el PR.
 5. Se exige codigo formateado con [prettier](https://www.prettier.io) antes del merge. En el [README][README.md] aparece ayuda para esto.
-6. Una vez aprobado el PR el equipo mantenedor realizará el merge
+6. Una vez aprobado el PR el equipo mantenedor realizará el merge.
+7. Por favor elimina de NOW el artefacto que creaste una vez que se realizó el merge.
 
 ## Código de conducta
 
